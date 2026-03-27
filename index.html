@@ -671,13 +671,7 @@ const cases = {
     next: 'maiddy',
     // CHANGE THESE TO YOUR IMAGE PATHS
     mockups: [
-      'Dashboard-1.jpg',
-      'Dashboard.jpg',
-      'Signupactive.jpg',
-      'TransferType.jpg',
-      'Transfer-1.jpg',
-      'Transfer-2.jpg',
-      'Transfer.jpg'
+      'Dashboard.png'
     ],
     sections: [
       { title: 'Project Overview', body: 'I worked with Integrated Software Services to redesign their microfinance CRM platform. My role covered end-to-end UX — from stakeholder interviews and user research to final UI handoff.' },
@@ -690,18 +684,18 @@ const cases = {
     tags: ['SaaS', 'Collaboration', 'Product Design'],
     title: 'Designing a Collaboration & File Management Platform',
     desc: 'Designed an end-to-end collaboration system that helps teams manage files, communication, and workflows more efficiently.',
-    next: 'irespond',
+    next: 'blakskill',
     // CHANGE THESE TO YOUR IMAGE PATHS
     mockups: [
-      'SignIn.png',
-      'DashboardD.png',
+      'Sign In.png',
+      'Dashboard.png',
       'Rooms.png',
       'Profile.png',
       'Meeting.png',
       'Files.png',
-      'Chats.png'
-      'Chats-1.png'
-      'Calendar.png'
+      'Chats.png',
+      'Chats-1.png',
+      'Calendar.png',
       'Calendar-1.png'
     ],
     sections: [
@@ -720,18 +714,18 @@ const cases = {
       'Dashboardd.png',
       'Dashboarrd.png',
       'Reports.png',
-      'RemoteJobs(Overview).png',
-      'TalentReferenceVerificationNotification.png',
-      'LandingpageforBlakacademy.png',
-      'Talentreference.png'
-      'TrainingDashboard.png'
+      'Remote Jobs (Overview).png',
+      'Talent Reference Verification Notification.png',
+      'Landing page for Blakacademy.png',
+      'Talent reference.png',
+      'Training Dashboard.png'
     ],
     sections: [
       { title: 'Project Overview', body: 'While at Blakskill, I worked on several CRM platform experiences focused on HR operations and internal business workflows. My role covered product thinking, flow design, interface design, and improving usability across multiple modules.' },
       { title: 'The Problem', body: 'Many internal HR and operations workflows were too manual, repetitive, and difficult to track. Teams needed cleaner systems for managing records, communication, approvals, and day-to-day operational tasks without jumping across disconnected tools.' },
-      { title: 'Understanding the Users', body: 'The main users were HR teams, operations staff, recruiters, and internal coordinators. Their biggest pain points were scattered information, too many repetitive actions, weak visibility into workflow status, and interfaces that slowed them down instead of helping them move faster.' }
-      { title: 'Design Process', steps: ['Mapped existing HR and CRM workflows across multiple use cases', 'Designed clearer task flows for records, approvals, and communication management', 'Created wireframes and polished UI screens for different platform modules', 'Improved consistency by reusing components and patterns across products', 'Worked closely with stakeholders to refine flows based on operational needs'] }
-      { title: 'Key Contributions', body: 'Across the CRM work, I designed experiences for structured data entry, dashboard views, profile and record management, settings, internal actions, and supporting workflow screens that made the platforms easier to use and easier to scale.' }
+      { title: 'Understanding the Users', body: 'The main users were HR teams, operations staff, recruiters, and internal coordinators. Their biggest pain points were scattered information, too many repetitive actions, weak visibility into workflow status, and interfaces that slowed them down instead of helping them move faster.' },
+      { title: 'Design Process', steps: ['Mapped existing HR and CRM workflows across multiple use cases', 'Designed clearer task flows for records, approvals, and communication management', 'Created wireframes and polished UI screens for different platform modules', 'Improved consistency by reusing components and patterns across products', 'Worked closely with stakeholders to refine flows based on operational needs'] },
+      // { title: 'Key Contributions', body: 'Across the CRM work, I designed experiences for structured data entry, dashboard views, profile and record management, settings, internal actions, and supporting workflow screens that made the platforms easier to use and easier to scale.' }
       { title: 'What I Learned', body: 'Working on several CRM products at once strengthened my ability to design structured systems that stay flexible. It also taught me how important clarity, consistency, and speed are in tools people use every single day at work.' }
 
     ]
@@ -824,13 +818,20 @@ function openCase(id) {
 
   const next = cases[c.next];
   const nextEl = document.getElementById('cs-next');
-  nextEl.innerHTML = `
-    <div>
-      <div class="cs-next-label">Next Project</div>
-      <div class="cs-next-title">${next.title}</div>
-    </div>
-    <div class="cs-next-arrow">→</div>`;
-  nextEl.onclick = () => openCase(c.next);
+  if (next) {
+    nextEl.innerHTML = `
+      <div>
+        <div class="cs-next-label">Next Project</div>
+        <div class="cs-next-title">${next.title}</div>
+      </div>
+      <div class="cs-next-arrow">→</div>`;
+    nextEl.onclick = () => openCase(c.next);
+    nextEl.style.display = 'flex';
+  } else {
+    nextEl.innerHTML = '';
+    nextEl.onclick = null;
+    nextEl.style.display = 'none';
+  }
 
   history.pushState({ case: id }, '', `#${id}`);
   showPage('page-case');
